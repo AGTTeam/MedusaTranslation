@@ -1,0 +1,12 @@
+__pycache__
+
+venv
+build
+data*
+*.log
+*.manifest
+*.spec
+
+imagemagick
+*.exe
+*.bat

@@ -13,7 +13,7 @@ def run():
         extension = os.path.splitext(file)[1]
         pngfile = file.replace(extension, ".psd")
         if not os.path.isfile(workfolder + pngfile):
-            pngfile = pngfile.replace(extension, ".png")
+            pngfile = file.replace(extension, ".png")
             if not os.path.isfile(workfolder + pngfile):
                 continue
         common.logDebug("Processing", file, "...")

@@ -8,22 +8,27 @@ def run():
     binin = "data/extract/arm9.bin"
     binout = "data/repack/arm9.bin"
     binfile = "data/bin_input.txt"
+
+    common.logMessage("Patching BIN ...")
+    common.copyFile(binin, binout)
+    with common.Stream(binout, "r+b") as fo:
+        # Patch the text rendering function to allow more than 15 characters per line (Thanks StorMyu!)
+        fo.seek(0x6680C)
+        fo.writeByte(0xFF)
+    common.logMessage("Done!")
+
     if not os.path.isfile(binfile):
         common.logError("Input file", binfile, "not found")
         return
 
     common.logMessage("Repacking BIN from", binfile, "...")
-    # Copy the ARM file and load common section
-    common.copyFile(binin, binout)
+    # load common section
     section = {}
     with codecs.open(binfile, "r", "utf-8") as bin:
         section = common.getSection(bin, "")
         chartot, transtot = common.getSectionPercentage(section)
     with common.Stream(binin, "rb") as fi:
         with common.Stream(binout, "r+b") as fo:
-            # Patch the text rendering function to allow more than 15 characters per line (Thanks StorMyu!)
-            fo.seek(0x6680C)
-            fo.writeByte(0xFF)
             # Skip the beginning and end of the file to avoid false-positives
             fi.seek(game.binrange[0])
             while fi.tell() < game.binrange[1]:

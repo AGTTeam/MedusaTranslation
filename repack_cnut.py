@@ -72,7 +72,7 @@ def run():
                                     newsjis = pre + newsjis + post
                                     if newsjis != check:
                                         newsjis = common.wordwrap(newsjis, glyphs, 205, game.detectTextCode)
-                                        newsjis = newsjis.replace("|", "<0A>")
+                                        newsjis = newsjis.replace("|", "<0A>").replace(">>", "#INP()" + pre)
                                         # Copy data up to here
                                         endpos = fin.tell()
                                         fin.seek(lastpos)

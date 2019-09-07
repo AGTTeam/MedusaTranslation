@@ -9,14 +9,15 @@ Run "tool extract --help" or "tool repack --help" for more info.
 ## Run from source
 Install [Python 3.7](https://www.python.org/downloads/), pip and virtualenv.  
 Download [ndstool.exe](https://www.darkfader.net/ds/files/ndstool.exe).  
-(Optional, only for patch creation) Download xdelta.exe.  
-Pull [hacktools](https://github.com/Illidanz/hacktools).  
+Download xdelta.exe.  
+Pull [hacktools](https://github.com/Illidanz/hacktools) in the parent folder.  
 ```
 virtualenv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 pip install -e ../hacktools
 ```
+Run tool.py or build with build.bat  
 ## Text Editing
 Rename the \*\_output.txt files to \*\_input.txt (bin_output.txt to bin_input.txt, etc) and add translations for each line after the "=" sign.  
 Control codes are specified as \<XX\> or UNK(XXXX), they should usually be kept. Line breaks are specified as "|" or "<0A>" depending on the file.  

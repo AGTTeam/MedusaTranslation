@@ -4,9 +4,5 @@ venv
 build
 data*
 *.log
-*.manifest
 *.spec
-
-imagemagick
 *.exe
-*.bat

@@ -20,9 +20,10 @@ pip install -e ../hacktools
 Run tool.py or build with build.bat  
 ## Text Editing
 Rename the \*\_output.txt files to \*\_input.txt (bin_output.txt to bin_input.txt, etc) and add translations for each line after the "=" sign.  
+The text in cnut_input is automatically wordwrapped, but a "|" can be used to force a line break.  
+New textboxes can be added by appending ">>" followed by the new text.  
 Control codes are specified as \<XX\> or UNK(XXXX), they should usually be kept. Line breaks are specified as "|" or "<0A>" depending on the file.  
 To blank out a line, use a single "!". If just left empty, the line will be left untranslated.  
-New textboxes can be added by appending ">>" followed by the new text.  
 Comments can be added at the end of lines by using //  
 ## Image Editing
 Rename the out\_\* folders to work\_\* (out_NCGR to work_NCGR, etc).  

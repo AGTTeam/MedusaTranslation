@@ -11,8 +11,6 @@ def run():
     common.logMessage("Extracting NCGR to", outfolder, "...")
     files = common.getFiles(infolder, [".NCGR", ".NCBR"])
     for file in common.showProgress(files):
-        if file.count("icon2") == 0:
-            continue
         common.logDebug("Processing", file, "...")
         extension = os.path.splitext(file)[1]
         palettefile = infolder + file.replace(extension, ".NCLR")

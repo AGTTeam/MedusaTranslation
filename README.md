@@ -1,15 +1,15 @@
 # Medusa Translation
 ## Setup
 Create a "data" folder and copy the rom as "rom.nds" in it.  
-Download [ndstool.exe](https://www.darkfader.net/ds/files/ndstool.exe).  
-(Optional, only for patch creation) Download xdelta.exe.  
-(Optional, only for PSD export) Create a "imagemagick" folder and extract [ImageMagick portable](https://imagemagick.org/script/download.php#windows) in it.  
+(Optional, only for PSD export) Install [ImageMagick](https://imagemagick.org/script/download.php#windows), check the "Add application directory to your system path" while installing.  
 ## Run from binary
-Download the latest [release](https://github.com/Illidanz/MedusaTranslation/releases) in the same folder as the dependencies.  
+Download the latest [release](https://github.com/Illidanz/MedusaTranslation/releases) outside the data folder.  
 Run "tool extract" to extract everything and "tool repack" to repack after editing.  
 Run "tool extract --help" or "tool repack --help" for more info.  
 ## Run from source
 Install [Python 3.7](https://www.python.org/downloads/), pip and virtualenv.  
+Download [ndstool.exe](https://www.darkfader.net/ds/files/ndstool.exe).  
+(Optional, only for patch creation) Download xdelta.exe.  
 Pull [hacktools](https://github.com/Illidanz/hacktools).  
 ```
 virtualenv venv

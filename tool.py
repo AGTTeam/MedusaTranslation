@@ -1,5 +1,6 @@
 import os
 import click
+import game
 from hacktools import common, nds
 
 version = "0.9.1"
@@ -22,8 +23,11 @@ def extract(rom, bin, cnut, ncgr, nsbmd):
     if all or rom:
         nds.extractRom(romfile, infolder, outfolder)
     if all or bin:
-        import extract_bin
-        extract_bin.run()
+        binfile = "data/extract/arm9.bin"
+        outfile = "data/bin_output.txt"
+        common.logMessage("Extracting BIN to", outfile, "...")
+        foundstrings = nds.extractBinaryStrings(binfile, outfile, game.binrange, game.detectShiftJIS)
+        common.logMessage("Done! Extracted", len(foundstrings), "lines")
     if all or cnut:
         import extract_cnut
         extract_cnut.run()

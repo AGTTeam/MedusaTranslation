@@ -101,7 +101,7 @@ def detectTextCode(s, i=0):
     return 0
 
 
-def detectShiftJIS(f):
+def detectShiftJIS(f, encoding="shift_jis"):
     ret = ""
     sjis = 0
     while True:
@@ -120,7 +120,7 @@ def detectShiftJIS(f):
         elif common.checkShiftJIS(b1, b2):
             f.seek(-2, 1)
             try:
-                ret += f.read(2).decode("shift-jis").replace("〜", "～")
+                ret += f.read(2).decode(encoding).replace("〜", "～")
                 sjis += 1
             except UnicodeDecodeError:
                 if ret.count("UNK(") >= 5:

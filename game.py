@@ -58,6 +58,7 @@ def writeShiftJIS(f, s, len2=False, untilZero=False, maxlen=0, encoding="shift_j
         f.writeUInt(0)
     i = 0
     x = 0
+    s = s.replace("～", "〜")
     while x < len(s):
         c = s[x]
         if c == "<" and x < len(s) - 3 and s[x+3] == ">":

@@ -25,7 +25,7 @@ def run():
     # load common section
     section = {}
     with codecs.open(binfile, "r", "utf-8") as bin:
-        section = common.getSection(bin, "")
+        section = common.getSection(bin, "", "//")
         chartot, transtot = common.getSectionPercentage(section)
     with common.Stream(binin, "rb") as fi:
         with common.Stream(binout, "r+b") as fo:
@@ -40,7 +40,6 @@ def run():
                     endpos = fi.tell() - 1
                     newlen = game.writeShiftJIS(fo, section[check][0], False, True, endpos - pos + 1)
                     if newlen < 0:
-                        fo.writeZero(1)
                         common.logError("String", section[check][0], "is too long.")
                     else:
                         fo.writeZero(endpos - fo.tell())

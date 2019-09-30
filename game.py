@@ -62,11 +62,15 @@ def writeShiftJIS(f, s, len2=False, untilZero=False, maxlen=0, encoding="shift_j
     while x < len(s):
         c = s[x]
         if c == "<" and x < len(s) - 3 and s[x+3] == ">":
+            if maxlen > 0 and i+1 > maxlen:
+                return -1
             code = s[x+1] + s[x+2]
             f.write(bytes.fromhex(code))
             x += 3
             i += 1
         elif c == "U" and x < len(s) - 4 and s[x:x+4] == "UNK(":
+            if maxlen > 0 and i+2 > maxlen:
+                return -1
             code = s[x+4] + s[x+5]
             f.write(bytes.fromhex(code))
             code = s[x+6] + s[x+7]
@@ -74,17 +78,21 @@ def writeShiftJIS(f, s, len2=False, untilZero=False, maxlen=0, encoding="shift_j
             x += 8
             i += 2
         elif c == "|":
+            if maxlen > 0 and i+1 > maxlen:
+                return -1
             f.writeByte(0x0A)
             i += 1
         elif ord(c) < 128:
+            if maxlen > 0 and i+1 > maxlen:
+                return -1
             f.writeByte(ord(c))
             i += 1
         else:
+            if maxlen > 0 and i+2 > maxlen:
+                return -1
             f.write(c.encode(encoding))
             i += 2
         x += 1
-        if maxlen > 0 and i >= maxlen:
-            return -1
     if untilZero:
         f.writeByte(0x00)
     else:

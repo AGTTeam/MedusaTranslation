@@ -3,12 +3,13 @@ import click
 import game
 from hacktools import common, nds
 
-version = "1.1.0"
+version = "1.1.1"
 romfile = "data/rom.nds"
 rompatch = "data/rom_patched.nds"
 bannerfile = "data/repack/banner.bin"
 patchfile = "data/patch.xdelta"
 infolder = "data/extract/"
+replacefolder = "data/replace/"
 outfolder = "data/repack/"
 
 
@@ -57,6 +58,8 @@ def repack(no_rom, bin, cnut, ncgr):
         repack_ncgr.run()
 
     if not no_rom:
+        if os.path.isdir(replacefolder):
+            common.mergeFolder(replacefolder, outfolder)
         nds.editBannerTitle(bannerfile, "Soul Eater\nMedusa's Conspiracy\nBandai Namco Games")
         nds.repackRom(romfile, rompatch, outfolder, patchfile)
 

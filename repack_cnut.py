@@ -19,6 +19,7 @@ def run():
     outfolder = "data/repack/data/Rom/event/script/"
     infile = "data/cnut_input.txt"
     fontfile = "data/repack/data/Rom/font/font0.NFTR"
+    replacefontfile = "data/replace/data/Rom/font/font0.NFTR"
     chartot = transtot = 0
 
     if not os.path.isfile(infile):
@@ -26,7 +27,10 @@ def run():
         return
 
     common.logMessage("Repacking CNUT from", infile, "...")
-    glyphs = nitro.getFontGlyphs(fontfile)
+    if os.path.isfile(replacefontfile):
+        glyphs = nitro.getFontGlyphs(replacefontfile)
+    else:
+        glyphs = nitro.getFontGlyphs(fontfile)
     with codecs.open(infile, "r", "utf-8") as cnut:
         files = common.getFiles(infolder, ".cnut")
         for file in common.showProgress(files):

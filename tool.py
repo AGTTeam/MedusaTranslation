@@ -3,7 +3,7 @@ import click
 import game
 from hacktools import common, nds
 
-version = "1.1.1"
+version = "1.1.2"
 romfile = "data/rom.nds"
 rompatch = "data/rom_patched.nds"
 bannerfile = "data/repack/banner.bin"

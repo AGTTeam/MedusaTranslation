@@ -5,7 +5,7 @@ codes = [0x0D, 0x0A]
 # Control codes found in BIN strings
 bincodes = [0x0A, 0x20]
 # Ranges for BIN string locations
-binrange = (1218500, 1244000)
+binrange = (1197568, 1244000)
 # Characters that are encoded weirdly in the .cnut files
 fixchars = {(0x83, 0x01): "ソ", (0x8D, 0x01): "構", (0x8F, 0x01): "十", (0x90, 0x01): "申", (0x93, 0x01): "貼", (0x94, 0x01): "能", (0x97, 0x01): "予"}
 # Screen-size image files that have a wrong size in the NSCR file
@@ -119,7 +119,7 @@ def detectShiftJIS(f, encoding="shift_jis"):
         if ret != "" and b1 in bincodes:
             ret += "<" + common.toHex(b1) + ">"
             continue
-        elif b1 >= 32 and b1 <= 126 and (sjis > 0 or chr(b1) == "#" or ret.startswith("#")):
+        elif b1 >= 28 and b1 <= 126 and (sjis > 0 or chr(b1) == "#" or ret.startswith("#")):
             ret += chr(b1)
             continue
         b2 = f.readByte()

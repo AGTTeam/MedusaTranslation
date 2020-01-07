@@ -12,11 +12,6 @@ def run():
     files = common.getFiles(infolder, [".NCGR", ".NCBR"])
     for file in common.showProgress(files):
         extension = os.path.splitext(file)[1]
-        pngfile = file.replace(extension, ".psd")
-        if not os.path.isfile(workfolder + pngfile):
-            pngfile = file.replace(extension, ".png")
-            if not os.path.isfile(workfolder + pngfile):
-                continue
         common.logDebug("Processing", file, "...")
         palettefile = file.replace(extension, ".NCLR")
         mapfile = file.replace(extension, ".NSCR")
@@ -28,6 +23,11 @@ def run():
             common.copyFile(infolder + mapfile, outfolder + mapfile)
         if os.path.isfile(infolder + cellfile):
             common.copyFile(infolder + cellfile, outfolder + cellfile)
+        pngfile = file.replace(extension, ".psd")
+        if not os.path.isfile(workfolder + pngfile):
+            pngfile = file.replace(extension, ".png")
+            if not os.path.isfile(workfolder + pngfile):
+                continue
         # Read image
         palettes, ncgr, nscr, ncer, width, height = nitro.readNitroGraphic(outfolder + palettefile, outfolder + file, outfolder + mapfile, outfolder + cellfile)
         if ncgr is None:

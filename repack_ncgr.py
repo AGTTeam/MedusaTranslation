@@ -46,5 +46,5 @@ def run():
             else:
                 nitro.writeMappedNSCR(outfolder + file, outfolder + mapfile, ncgr, nscr, workfolder + pngfile, palettes, width, height)
         else:
-            nitro.writeNCER(outfolder + file, ncgr, ncer, workfolder + pngfile, palettes)
+            nitro.writeNCER(outfolder + file, outfolder + cellfile, ncgr, ncer, workfolder + pngfile, palettes, width, height)
     common.logMessage("Done!")

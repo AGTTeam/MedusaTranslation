@@ -3,7 +3,7 @@ import game
 from hacktools import common, nitro
 
 
-def run():
+def run(appendTiles=False):
     workfolder = "data/work_NCGR/"
     infolder = "data/extract/data/Rom/"
     outfolder = "data/repack/data/Rom/"
@@ -21,7 +21,9 @@ def run():
             common.copyFile(infolder + palettefile, outfolder + palettefile)
         if os.path.isfile(infolder + mapfile):
             common.copyFile(infolder + mapfile, outfolder + mapfile)
-        if os.path.isfile(infolder + cellfile):
+        if os.path.isfile(workfolder + cellfile):
+            common.copyFile(workfolder + cellfile, outfolder + cellfile)
+        elif os.path.isfile(infolder + cellfile):
             common.copyFile(infolder + cellfile, outfolder + cellfile)
         pngfile = file.replace(extension, ".psd")
         if not os.path.isfile(workfolder + pngfile):
@@ -46,5 +48,5 @@ def run():
             else:
                 nitro.writeMappedNSCR(outfolder + file, outfolder + mapfile, ncgr, nscr, workfolder + pngfile, palettes, width, height)
         else:
-            nitro.writeNCER(outfolder + file, outfolder + cellfile, ncgr, ncer, workfolder + pngfile, palettes, width, height)
+            nitro.writeNCER(outfolder + file, outfolder + cellfile, ncgr, ncer, workfolder + pngfile, palettes, width, height, appendTiles)
     common.logMessage("Done!")

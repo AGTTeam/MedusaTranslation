@@ -3,7 +3,7 @@ import click
 import game
 from hacktools import common, nds
 
-version = "1.3.0"
+version = "1.3.1"
 romfile = "data/rom.nds"
 rompatch = "data/rom_patched.nds"
 bannerfile = "data/repack/banner.bin"
@@ -45,7 +45,8 @@ def extract(rom, bin, cnut, ncgr, nsbmd):
 @click.option("--bin", is_flag=True, default=False)
 @click.option("--cnut", is_flag=True, default=False)
 @click.option("--ncgr", is_flag=True, default=False)
-def repack(no_rom, bin, cnut, ncgr):
+@click.option("--ncer", is_flag=True, default=False)
+def repack(no_rom, bin, cnut, ncgr, ncer):
     all = not bin and not cnut and not ncgr
     if all or bin:
         import repack_bin
@@ -55,7 +56,7 @@ def repack(no_rom, bin, cnut, ncgr):
         repack_cnut.run()
     if all or ncgr:
         import repack_ncgr
-        repack_ncgr.run()
+        repack_ncgr.run(ncer)
 
     if not no_rom:
         if os.path.isdir(replacefolder):

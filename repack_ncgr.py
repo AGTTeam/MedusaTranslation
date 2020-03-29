@@ -35,18 +35,13 @@ def run(appendTiles=False):
         if ncgr is None:
             continue
         # Fix a couple weird images with wrong sizes
-        screenfile = False
         if file.replace(extension, "") in game.screenfiles or file.startswith("event/bg/bg0"):
             width = height = 256
-            screenfile = True
         # Import img
         if nscr is None and ncer is None:
             nitro.writeNCGR(outfolder + file, ncgr, workfolder + pngfile, palettes, width, height)
         elif ncer is None:
-            if screenfile:
-                nitro.writeNSCR(outfolder + file, ncgr, nscr, workfolder + pngfile, palettes, width, height)
-            else:
-                nitro.writeMappedNSCR(outfolder + file, outfolder + mapfile, ncgr, nscr, workfolder + pngfile, palettes, width, height)
+            nitro.writeMappedNSCR(outfolder + file, outfolder + mapfile, ncgr, nscr, workfolder + pngfile, palettes, width, height)
         else:
             nitro.writeNCER(outfolder + file, outfolder + cellfile, ncgr, ncer, workfolder + pngfile, palettes, width, height, appendTiles)
     common.logMessage("Done!")

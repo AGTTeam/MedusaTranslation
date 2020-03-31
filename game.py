@@ -119,7 +119,7 @@ def detectShiftJIS(f, encoding="shift_jis"):
         if ret != "" and b1 in bincodes:
             ret += "<" + common.toHex(b1) + ">"
             continue
-        elif b1 >= 28 and b1 <= 126 and (sjis > 0 or chr(b1) == "#" or ret.startswith("#")):
+        elif b1 >= 28 and b1 <= 126 and (sjis > 0 or chr(b1) == "#" or (b1 >= 48 and b1 <= 57) or ret.startswith("#")):
             ret += chr(b1)
             continue
         b2 = f.readByte()
@@ -134,7 +134,7 @@ def detectShiftJIS(f, encoding="shift_jis"):
                 if ret.count("UNK(") >= 5:
                     return ""
                 ret += "UNK(" + common.toHex(b1) + common.toHex(b2) + ")"
-        elif len(ret) > 0 and ret.count("UNK(") < 5:
+        elif len(ret) > 1 and ret.count("UNK(") < 5:
             ret += "UNK(" + common.toHex(b1) + common.toHex(b2) + ")"
         else:
             return ""

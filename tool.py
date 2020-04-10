@@ -3,7 +3,7 @@ import click
 import game
 from hacktools import common, nds
 
-version = "1.3.4"
+version = "1.3.5"
 romfile = "data/medusa.nds"
 rompatch = "data/medusa_patched.nds"
 bannerfile = "data/repack/banner.bin"

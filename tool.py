@@ -1,7 +1,7 @@
 import os
 import click
 import game
-from hacktools import common, nds
+from hacktools import common, nds, nitro
 
 version = "1.3.5"
 romfile = "data/medusa.nds"
@@ -36,8 +36,7 @@ def extract(rom, bin, cnut, ncgr, nsbmd):
         import extract_ncgr
         extract_ncgr.run()
     if nsbmd:
-        import extract_nsbmd
-        extract_nsbmd.run()
+        nitro.extractNSBMD("data/extract/data/Rom/", "data/out_NSBMD/")
 
 
 @common.cli.command()

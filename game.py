@@ -1,4 +1,4 @@
-from hacktools import common
+from hacktools import common, nitro
 
 # Control codes found in strings
 codes = [0x0D, 0x0A]
@@ -138,3 +138,14 @@ def detectShiftJIS(f, encoding="shift_jis"):
             ret += "UNK(" + common.toHex(b1) + common.toHex(b2) + ")"
         else:
             return ""
+
+
+def readImage(infolder, file, extension):
+    palettefile = file.replace(extension, ".NCLR")
+    mapfile = file.replace(extension, ".NSCR")
+    cellfile = file.replace(extension, ".NCER")
+    palettes, image, map, cell, width, height = nitro.readNitroGraphic(infolder + palettefile, infolder + file, infolder + mapfile, infolder + cellfile)
+    # Fix a couple weird images with wrong sizes
+    if file.replace(extension, "") in screenfiles or file.startswith("event/bg/bg0"):
+        width = height = 256
+    return palettes, image, map, cell, width, height, mapfile, cellfile

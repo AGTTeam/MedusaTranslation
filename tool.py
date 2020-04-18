@@ -33,8 +33,7 @@ def extract(rom, bin, cnut, ncgr, nsbmd):
         import extract_cnut
         extract_cnut.run()
     if all or ncgr:
-        import extract_ncgr
-        extract_ncgr.run()
+        nitro.extractIMG("data/extract/data/Rom/", "data/out_NCGR/", [".NCGR", ".NCBR"], game.readImage)
     if nsbmd:
         nitro.extractNSBMD("data/extract/data/Rom/", "data/out_NSBMD/")
 
@@ -44,8 +43,7 @@ def extract(rom, bin, cnut, ncgr, nsbmd):
 @click.option("--bin", is_flag=True, default=False)
 @click.option("--cnut", is_flag=True, default=False)
 @click.option("--ncgr", is_flag=True, default=False)
-@click.option("--ncer", is_flag=True, default=False)
-def repack(no_rom, bin, cnut, ncgr, ncer):
+def repack(no_rom, bin, cnut, ncgr):
     all = not bin and not cnut and not ncgr
     if all or bin:
         import repack_bin
@@ -54,13 +52,12 @@ def repack(no_rom, bin, cnut, ncgr, ncer):
         import repack_cnut
         repack_cnut.run()
     if all or ncgr:
-        import repack_ncgr
-        repack_ncgr.run(ncer)
+        nitro.repackIMG("data/work_NCGR/", "data/extract/data/Rom/", "data/repack/data/Rom/", [".NCGR", ".NCBR"], game.readImage)
 
     if not no_rom:
         if os.path.isdir(replacefolder):
             common.mergeFolder(replacefolder, outfolder)
-        nds.editBannerTitle(bannerfile, "Soul Eater\nMedusa's Conspiracy\nBandai Namco Games")
+        nds.editBannerTitle(bannerfile, "Soul Eater\nMedusa's Plot\nBandai Namco Games")
         nds.repackRom(romfile, rompatch, outfolder, patchfile)
 
 

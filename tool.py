@@ -24,11 +24,7 @@ def extract(rom, bin, cnut, ncgr, nsbmd):
     if all or rom:
         nds.extractRom(romfile, infolder, outfolder)
     if all or bin:
-        binfile = "data/extract/arm9.bin"
-        outfile = "data/bin_output.txt"
-        common.logMessage("Extracting BIN to", outfile, "...")
-        foundstrings = nds.extractBinaryStrings(binfile, outfile, game.binrange, game.detectShiftJIS)
-        common.logMessage("Done! Extracted", len(foundstrings), "lines")
+        nds.extractBIN(game.binrange, game.detectShiftJIS)
     if all or cnut:
         import extract_cnut
         extract_cnut.run()

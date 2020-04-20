@@ -77,11 +77,11 @@
         },
         "hacktools": {
             "hashes": [
-                "sha256:033cb6aef90927e2ffe6d03a873a6ebc61c03fa6c4e4e48e47d90e4d3b4d504f",
-                "sha256:b3fddf46483f2536f3b44838659ba1b4ac1f646cc8c9183a862f6fbe468ccd6b"
+                "sha256:88f49065b7d963bf57877d3261402f2b799ec30f008e86faa04259fc5a0e261f",
+                "sha256:a47dd14c6d3552fe65ef57e6a73382ba6d740d156242879d1b4355f394241e4a"
             ],
             "index": "pypi",
-            "version": "==0.8.3"
+            "version": "==0.8.4"
         },
         "ndspy": {
             "hashes": [

@@ -1,7 +1,7 @@
 # Medusa Translation
 ## Setup
 Create a "data" folder and copy the rom as "medusa.nds" in it.  
-(Optional, only for PSD export) Install [ImageMagick](https://imagemagick.org/script/download.php#windows), check the "Add application directory to your system path" while installing.  
+(Optional, only for PSD export) Install [ImageMagick](https://imagemagick.org/script/download.php#windows), check "Add application directory to your system path" while installing.  
 ## Run from binary
 Download the latest [release](https://github.com/Illidanz/MedusaTranslation/releases) outside the data folder.  
 Run "tool extract" to extract everything and "tool repack" to repack after editing.  

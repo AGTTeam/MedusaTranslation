@@ -28,9 +28,9 @@ def run():
 
     common.logMessage("Repacking CNUT from", infile, "...")
     if os.path.isfile(replacefontfile):
-        glyphs = nitro.getFontGlyphs(replacefontfile)
+        glyphs = nitro.readNFTR(replacefontfile).glyphs
     else:
-        glyphs = nitro.getFontGlyphs(fontfile)
+        glyphs = nitro.readNFTR(fontfile).glyphs
     with codecs.open(infile, "r", "utf-8") as cnut:
         files = common.getFiles(infolder, ".cnut")
         for file in common.showProgress(files):

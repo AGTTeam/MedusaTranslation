@@ -3,10 +3,11 @@ import click
 import game
 from hacktools import common, nds, nitro
 
-version = "1.4.0"
+version = "1.4.1"
 romfile = "data/medusa.nds"
 rompatch = "data/medusa_patched.nds"
 bannerfile = "data/repack/banner.bin"
+binfile = "data/repack/arm9.bin"
 patchfile = "data/patch.xdelta"
 infolder = "data/extract/"
 replacefolder = "data/replace/"
@@ -42,8 +43,13 @@ def extract(rom, bin, cnut, ncgr, nsbmd):
 def repack(no_rom, bin, cnut, ncgr):
     all = not bin and not cnut and not ncgr
     if all or bin:
-        import repack_bin
-        repack_bin.run()
+        nds.repackBIN(game.binrange, game.freeranges, game.detectShiftJIS, game.writeBINShiftJIS, "shift_jis", "//")
+        common.logMessage("Patching BIN ...")
+        with common.Stream(binfile, "r+b") as fo:
+            # Patch the text rendering function to allow more than 15 characters per line (Thanks StorMyu!)
+            fo.seek(0x6680C)
+            fo.writeByte(0xFF)
+        common.logMessage("Done!")
     if all or cnut:
         import repack_cnut
         repack_cnut.run()

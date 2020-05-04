@@ -3,7 +3,7 @@ import click
 import game
 from hacktools import common, nds, nitro
 
-version = "1.4.1"
+version = "1.4.2"
 romfile = "data/medusa.nds"
 rompatch = "data/medusa_patched.nds"
 bannerfile = "data/repack/banner.bin"

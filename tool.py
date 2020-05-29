@@ -3,7 +3,7 @@ import click
 import game
 from hacktools import common, nds, nitro
 
-version = "1.4.2"
+version = "1.4.3"
 romfile = "data/medusa.nds"
 rompatch = "data/medusa_patched.nds"
 bannerfile = "data/repack/banner.bin"
@@ -61,6 +61,18 @@ def repack(no_rom, bin, cnut, ncgr):
             common.mergeFolder(replacefolder, outfolder)
         nds.editBannerTitle(bannerfile, "Soul Eater\nMedusa's Plot\nBandai Namco Games")
         nds.repackRom(romfile, rompatch, outfolder, patchfile)
+
+
+@common.cli.command()
+def patchdump():
+    patchfile = "data/bad_to_good.xdelta"
+    common.logMessage("Creating xdelta patch", patchfile, "...")
+    xdelta = common.bundledFile("xdelta.exe")
+    if not os.path.isfile(xdelta):
+        common.logError("xdelta not found")
+        return
+    common.execute(xdelta + " -f -e -s {rom} {rompatch} {patch}".format(rom=romfile.replace(".nds", "_bad.nds"), rompatch=romfile, patch=patchfile), False)
+    common.logMessage("Done!")
 
 
 if __name__ == "__main__":

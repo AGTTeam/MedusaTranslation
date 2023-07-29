@@ -3,8 +3,8 @@ import click
 import game
 from hacktools import common, nds, nitro
 
-version = "1.4.3"
-romfile = "data/medusa.nds"
+version = "1.5.0"
+romfile = "medusa.nds"
 rompatch = "data/medusa_patched.nds"
 bannerfile = "data/repack/banner.bin"
 binfile = "data/repack/arm9.bin"
@@ -36,7 +36,7 @@ def extract(rom, bin, cnut, ncgr, nsbmd):
 
 
 @common.cli.command()
-@click.option("--no-rom", is_flag=True, default=False)
+@click.option("--no-rom", is_flag=True, default=False, hidden=True)
 @click.option("--bin", is_flag=True, default=False)
 @click.option("--cnut", is_flag=True, default=False)
 @click.option("--ncgr", is_flag=True, default=False)
@@ -63,7 +63,7 @@ def repack(no_rom, bin, cnut, ncgr):
         nds.repackRom(romfile, rompatch, outfolder, patchfile)
 
 
-@common.cli.command()
+@common.cli.command(hidden=True)
 def patchdump():
     patchfile = "data/bad_to_good.xdelta"
     common.logMessage("Creating xdelta patch", patchfile, "...")
@@ -76,8 +76,4 @@ def patchdump():
 
 
 if __name__ == "__main__":
-    click.echo("MedusaTranslation version " + version)
-    if not os.path.isdir("data"):
-        common.logError("data folder not found.")
-        quit()
-    common.cli()
+    common.setupTool("MedusaTranslation", version, "data", romfile, 0x151439bc)
